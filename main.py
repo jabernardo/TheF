@@ -5,6 +5,7 @@ import os
 import configparser
 import argparse
 import sys
+import re
 from difflib import SequenceMatcher
 
 # function q()
@@ -81,10 +82,13 @@ class Quickie:
 
     def get_last_command(self, custom_history = None):
         history = os.path.expanduser(custom_history)
-        
+
         with open(history, "r") as bash_history:
-            ## Read fish history
-            return bash_history.readlines()[-2]
+            if "fish" in history:
+                cmds = re.findall(r"cmd: (.*)", bash_history.read())
+                return cmds[-2]
+            else:
+                return bash_history.readlines()[-2]
 
         return ""
 
