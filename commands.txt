@@ -1,0 +1,44 @@
+git clone
+git init
+git add
+git mv
+git reset
+git rm
+git bisect
+git bgrep
+git log
+git show
+git status
+git branch
+git checkout
+git commit
+git diff
+git merge
+git rebase
+git tag
+git fetch
+git pull 
+git push
+git help
+git remote
+git config
+apt list
+apt search
+apt show
+apt install
+apt remove
+apt autoremove
+apt update
+apt upgrade
+apt full-upgrade
+apt edit-sources
+sudo apt list
+sudo apt search
+sudo apt show
+sudo apt install
+sudo apt remove
+sudo apt autoremove
+sudo apt update
+sudo apt upgrade
+sudo apt full-upgrade
+sudo apt edit-sources
