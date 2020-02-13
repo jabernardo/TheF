@@ -22,7 +22,7 @@ from difflib import SequenceMatcher
 #     fi
 # }
 
-class Quickie:
+class TheF:
     homedir = "/"
 
     config = None
@@ -124,7 +124,7 @@ def main():
     parser.add_argument("-z", "--history", default="~/.bash_history", help="History file")
     args = parser.parse_args()
 
-    q = Quickie()
+    q = TheF()
 
     name = args.alias
     cwd = os.getcwd()

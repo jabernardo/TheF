@@ -3,7 +3,7 @@
 ### bash
 
 ```sh
-function q()
+function f()
 {
     source="python /home/jabernardo/Workspace/q/main.py"
 
@@ -19,7 +19,7 @@ function q()
 ### fish
 
 ```sh
-function q
+function f
         set -l source "python /home/jabernardo/Workspace/q/main.py"
 
         if test (count $argv) -eq 0
