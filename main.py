@@ -56,6 +56,24 @@ class TheF:
         with open(self.config_path, "w") as configfile:
             self.config.write(configfile)
 
+    def __get_match(self, needle, haystack):
+        highest_word = ""
+        highest_ratio = 0
+
+        for cmd in haystack:
+            ratio = SequenceMatcher(None, needle, cmd).ratio()
+
+            if ratio > highest_ratio:
+                highest_word = cmd
+                highest_ratio = ratio
+        
+            params = needle.strip().split(" ")[ len(highest_word.split(" ")): ]
+
+            if highest_ratio > 0.8 and highest_ratio != 1.0:
+                return f"{ highest_word.strip() } { ' '.join(params) }"
+
+        return None
+
     ##
     ## Paths
     ##
@@ -80,40 +98,51 @@ class TheF:
 
     # F*ck!
 
-    def get_last_command(self, custom_history = None):
+    def get_last_command(self, custom_history = "~/.bash_history"):
         history = os.path.expanduser(custom_history)
 
-        with open(history, "r") as bash_history:
-            if "fish" in history:
-                cmds = re.findall(r"cmd: (.*)", bash_history.read())
-                return cmds[-2]
-            else:
-                return bash_history.readlines()[-2]
+        try:
+            with open(history, "r") as bash_history:
+                    if "fish" in history:
+                        cmds = re.findall(r"cmd: (.*)", bash_history.read())
+                        return cmds[-2]
+                    else:
+                        return bash_history.readlines()[-2]
+        except:
+            pass
 
         return ""
 
-        # os.system('history > tmp')
-        # print(open('tmp', 'r').read())
+    def get_history(self, custom_history = "~/.bash_history"):
+        history = os.path.expanduser(custom_history)
 
-    def get_prediction(self, command):
+        try:
+            with open(history, "r") as bash_history:
+                    if "fish" in history:
+                        return re.findall(r"cmd: (.*)", bash_history.read())
+                    else:
+                        return bash_history.readlines()
+        except:
+            pass
+
+        return []
+
+    def get_prediction(self, command, custom_history = "~/.bash_history"):
         commands = []
-        highest_word = ""
-        highest_ratio = 0
         
         with open(f"{self.application_path}/commands.txt", "r") as file:
             commands = file.readlines()
         
-        for cmd in commands:
-            ratio = SequenceMatcher(None, command, cmd).ratio()
+        ## First pass
+        result = self.__get_match(command, commands)
 
-            if ratio > highest_ratio:
-                highest_word = cmd
-                highest_ratio = ratio
+        if result:
+            return result
+ 
+        ## Second result
+        result = self.__get_match(command, self.get_history(custom_history))
 
-        
-        params = command.strip().split(" ")[ len(highest_word.split(" ")): ]
-
-        return f"{ highest_word.strip() } { ' '.join(params) }" if highest_ratio > 0.5 else ""
+        return "" if result is None else result
 
 def main():
     parser = argparse.ArgumentParser()
@@ -140,7 +169,7 @@ def main():
         if args.alias:
             print(q.get_path(args.alias))
         else:
-            print(q.get_prediction(q.get_last_command(args.history)))
+            print(q.get_prediction(q.get_last_command(args.history), args.history))
 
 if __name__ == "__main__":
     main()
