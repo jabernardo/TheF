@@ -103,11 +103,11 @@ class TheF:
 
         try:
             with open(history, "r") as bash_history:
-                    if "fish" in history:
-                        cmds = re.findall(r"cmd: (.*)", bash_history.read())
-                        return cmds[-2]
-                    else:
-                        return bash_history.readlines()[-2]
+                if "fish" in history:
+                    cmds = re.findall(r"cmd: (.*)", bash_history.read())
+                    return cmds[-2]
+                else:
+                    return bash_history.readlines()[-2]
         except:
             pass
 
