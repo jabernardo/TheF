@@ -10,6 +10,8 @@ function f()
     if [[ ( $# -eq 0 ) ]]; then
         history -w
         $($source $1)
+    elif [[ ( $1 == -* ) || ( $# -gt 1 ) ]]; then
+        $source $@
     else
         cd $($source $1)
     fi
@@ -29,5 +31,4 @@ function f
                 cd (eval $source $argv)
         end
 end
-
 ```
