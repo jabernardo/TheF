@@ -1,11 +1,32 @@
+# Shorthand ?! Press The F!
+Shorthand application for navigating in your terminal. Jump into directories and auto-correct commands.
+
+## Prerequisites
+Before you continue, ensure you have met the following requirements:
+
+- You have installed Python ^3.6
+- You have install poetry
+
 ## Installation
 
-### bash
+### Clone Repository
+
+```sh
+# Clone repository
+git clone https://github.com/jabernardo/TheF
+cd TheF
+# Install dependencies using poetry
+poetry install
+```
+
+## Hook up in the shell!
+
+#### bash
 
 ```sh
 function f()
 {
-    source="python /home/jabernardo/Workspace/q/main.py"
+    source="python /{installation path}/main.py"
 
     if [[ ( $# -eq 0 ) ]]; then
         history -w
@@ -18,11 +39,11 @@ function f()
 }
 ```
 
-### fish
+#### fish
 
 ```sh
 function f
-        set -l source "python /home/jabernardo/Workspace/q/main.py"
+        set -l source "python /{installation path}/main.py"
 
         if test (count $argv) -eq 0
                 history save
@@ -32,3 +53,11 @@ function f
         end
 end
 ```
+
+## Contibuting to TheF!
+To contribute to TheF! Make sure to give a star and forked this repository.
+
+Alternatively see the GitHub documentation on [creating a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+
+## License
+The `TheF` is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
