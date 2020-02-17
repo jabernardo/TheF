@@ -109,19 +109,21 @@ class TheF:
         highest_word = ""
         highest_ratio = 0
 
+        needle_hole = needle.strip().split(" ")
+
         for hay in haystack:
-            ratio = SequenceMatcher(None, needle, hay).ratio()
+            hay_tip = hay.strip().split(" ")
+            needle_tip = " ".join(needle_hole[:len(hay_tip)])
+
+            ratio = SequenceMatcher(None, needle_tip, hay).ratio()
 
             if ratio > highest_ratio:
                 highest_word = hay
                 highest_ratio = ratio
         
-            params = needle.strip().split(" ")[ len(highest_word.split(" ")): ]
+            params = needle_hole[ len(highest_word.split(" ")): ]
 
-            if highest_ratio > 0.8 and highest_ratio != 1.0:
-                return f"{ highest_word.strip() } { ' '.join(params) }"
-
-        return None
+        return f"{ highest_word.strip() } { ' '.join(params) }" if highest_ratio > 0.8 else None
 
     ##
     ## Jump Path!
