@@ -1,6 +1,8 @@
 # Shorthand ?! Press The F!
 Shorthand application for navigating in your terminal. Jump into directories and auto-correct commands.
 
+[![asciicast](https://asciinema.org/a/sQnjvTIWOCIbo3ycTi4x4gfGy.svg)](https://asciinema.org/a/sQnjvTIWOCIbo3ycTi4x4gfGy)
+
 ## Prerequisites
 Before you continue, ensure you have met the following requirements:
 
