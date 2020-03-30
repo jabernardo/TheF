@@ -18,7 +18,7 @@ Before you continue, ensure you have met the following requirements:
 git clone https://github.com/jabernardo/TheF
 cd TheF
 # Install dependencies using poetry
-poetry install
+pip install -r requirements.txt
 ```
 
 ## Hook up in the shell!
